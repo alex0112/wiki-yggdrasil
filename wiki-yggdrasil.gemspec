@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["alex0112"]
   spec.email         = ["alarsen0112@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{ Scrape Wikipedia articles and generate a json tree }
+  spec.description   = %q{ Given a Wikipedia article, generate a tree of linked articles from the summary of the first.}
+  spec.homepage      = "https://github.com/alex0112/wiki-yggdrasil"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
