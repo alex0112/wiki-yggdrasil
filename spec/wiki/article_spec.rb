@@ -37,8 +37,13 @@ describe Wiki::Yggdrasil::Article do
     end
   end
   
-  xdescribe '.summary' do
+  describe '.summary' do
+    it 'is a Nokogiri document' do
+      expect(@article.summary).to be_a Nokogiri::XML::NodeSet
+    end
+ 
     it 'only returns the summary section' do
+      expect(@article.summary).not_to match(/<div id="toc" class="toc">/)
     end
   end
 

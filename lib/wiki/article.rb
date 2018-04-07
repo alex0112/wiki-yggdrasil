@@ -17,5 +17,9 @@ module Wiki::Yggdrasil
       uri =~ /.*wikipedia\.org\/wiki\/.+/ ? true : false
     end
 
+    def summary
+      @summary ||= Nokogiri::HTML(Nokogiri::HTML(open(self.uri)).to_s.split('<div id="toc" class="toc">')[0]).css('p') ## TODO: Cleanup
+      return @summary
+    end
   end
 end
