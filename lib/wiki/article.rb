@@ -4,7 +4,6 @@ module Wiki::Yggdrasil
   
   class Article
     attr_reader :uri
-    attr_reader :summary
     
     def initialize(uri:)
       raise ArgumentError unless Wiki::Yggdrasil::Article.is_valid_wiki_article?(uri: uri)
@@ -30,4 +29,5 @@ module Wiki::Yggdrasil
     end
     
   end
+
 end
