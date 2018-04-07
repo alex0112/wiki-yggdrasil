@@ -47,11 +47,10 @@ describe Wiki::Yggdrasil::Article do
     end
   end
 
-  xdescribe '.summary_links' do
-    it 'returns a list' do
-    end
-
+  describe '.child_links' do
     it 'returns a list of valid wikipedia URIs' do
+      expect(@article.child_links.all? { |link| Wiki::Yggdrasil::Article.is_valid_wiki_article?(uri: link) }).to be true
     end
   end
 end
+
