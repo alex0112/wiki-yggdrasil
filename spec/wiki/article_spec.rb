@@ -19,7 +19,7 @@ describe Wiki::Yggdrasil::Article do
     
     context 'Given a non-valid wikipedia article' do
       it 'raises an argument error' do
-        expect { Wiki::Yggdrasil::Article.new() }.to raise_error ArgumentError
+        expect { Wiki::Yggdrasil::Article.new(uri: 'https://www.google.com/') }.to raise_error ArgumentError
       end
     end
   end
