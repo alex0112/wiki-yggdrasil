@@ -1,3 +1,5 @@
+require 'nokogiri'
+require 'open-uri'
 module Wiki::Yggdrasil
   class Article
     attr_reader :uri
