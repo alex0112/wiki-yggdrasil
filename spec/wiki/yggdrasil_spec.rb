@@ -26,10 +26,12 @@ describe Wiki::Yggdrasil do
         expect { Wiki::Yggdrasil::Yggdrasil.new(uri: 'https://www.google.com') }.to raise_error ArgumentError
       end
     end
+  end
 
-    it 'has a Wiki::Yggdrasil::Article as its @root attribute' do
+  describe '.root' do
+    it 'is a Wiki::Yggdrasil::Article object' do
       expect(@tree.root).to be_a Wiki::Yggdrasil::Article
     end
   end
-
+  
 end
