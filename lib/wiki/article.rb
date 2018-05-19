@@ -24,7 +24,7 @@ module Wiki::Yggdrasil
 
     def child_links
       summary      = self.summary
-      @child_links ||= summary.css('p a').map {|anchor| 'https://en.wikipedia.org' << anchor['href'] }
+      @child_links ||= summary.css('p a').map {|anchor| 'https://en.wikipedia.org' << anchor['href'] }.select {|uri| Wiki::Yggdrasil::Article.is_valid_wiki_article?(uri: uri) }
       return @child_links
     end
     

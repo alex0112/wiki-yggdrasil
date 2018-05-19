@@ -33,5 +33,12 @@ describe Wiki::Yggdrasil do
       expect(@tree.root).to be_a Wiki::Yggdrasil::Article
     end
   end
+
+  describe '.children' do
+    it 'returns a hash' do
+      children = @tree.children(depth: 1)
+      expect(children).to be_a Hash
+    end
+  end
   
 end

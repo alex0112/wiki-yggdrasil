@@ -51,6 +51,10 @@ describe Wiki::Yggdrasil::Article do
     it 'returns a list of valid wikipedia URIs' do
       expect(@article.child_links.all? { |link| Wiki::Yggdrasil::Article.is_valid_wiki_article?(uri: link) }).to be true
     end
+
+    it 'returns an array' do
+      expect(@article.child_links).to be_a Array
+    end
   end
 end
 
