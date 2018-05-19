@@ -1,4 +1,6 @@
 # Wiki::Yggdrasil
+![Travis CI Build](https://travis-ci.org/alex0112/wiki-yggdrasil.svg?branch=master)
+
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/wiki/yggdrasil`. To experiment with that code, run `bin/console` for an interactive prompt.
 
