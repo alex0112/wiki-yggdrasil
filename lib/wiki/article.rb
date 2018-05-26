@@ -19,15 +19,11 @@ module Wiki::Yggdrasil
 
     def summary
       @summary ||= Nokogiri::HTML(Nokogiri::HTML(open(self.uri)).to_s.split('<div id="toc" class="toc">')[0]).css('p') ## TODO: Cleanup
-      return @summary
     end
 
     def child_links
-      summary      = self.summary
+      summary        = self.summary
       @child_links ||= summary.css('p a').map {|anchor| 'https://en.wikipedia.org' << anchor['href'] }.select {|uri| Wiki::Yggdrasil::Article.is_valid_wiki_article?(uri: uri) }
-      return @child_links
     end
-    
   end
-
 end
