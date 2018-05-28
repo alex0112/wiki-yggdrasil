@@ -16,10 +16,10 @@ module Wiki
         get_children = lambda do |depth, article_children|
           article_children.each_with_object({}) do |uri, tree|
             if (depth == 0)
-              tree[uri] = Wiki::Yggdrasil::Article.new(uri: uri)
+              tree[uri] = nil
             else
               article       = Wiki::Yggdrasil::Article.new(uri: uri)
-              tree[article] = get_children.call(depth - 1, article.child_links)
+              tree[uri] = get_children.call(depth - 1, article.child_links)
             end
           end
         end    
