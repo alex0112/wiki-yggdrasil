@@ -15,7 +15,7 @@ module Wiki
       def children(depth: 4, article_children: self.root.child_links)
         get_children = lambda do |depth, article_children|
           article_children.each_with_object({}) do |uri, tree|
-            if (depth == 0)
+            if (depth == 1)
               tree[uri] = nil
             else
               article       = Wiki::Yggdrasil::Article.new(uri: uri)
