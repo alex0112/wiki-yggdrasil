@@ -18,11 +18,12 @@ module Wiki
             if (depth == 1)
               tree[uri] = nil
             else
-              article       = Wiki::Yggdrasil::Article.new(uri: uri)
+              article   = Wiki::Yggdrasil::Article.new(uri: uri)
+              @children = tree
               tree[uri] = get_children.call(depth - 1, article.child_links)
             end
           end
-        end    
+        end
 
         @children ||= get_children.call(depth, article_children)
       end
