@@ -17,8 +17,7 @@ module Wiki::Yggdrasil
     end
 
     def child_links
-      all_links       = scrape_all_summary_links
-      formatted_links = all_links.map { |anchor| 'https://en.wikipedia.org' << anchor['href'] }
+      formatted_links = format_links
       validated_links =  formatted_links.select { |uri| Wiki::Yggdrasil::Article.is_valid_wiki_article?(uri: uri) }
       @child_links  ||= validated_links
     end
@@ -26,12 +25,19 @@ module Wiki::Yggdrasil
     def scrape_all_summary_links
       self.summary.css('p a')
     end
+
+    def format_links(anchors: self.scrape_all_summary_links)
+      uris = anchors.map do |anchor|
+        anchor.nil? || anchor['href'].nil? ? next : 'https://en.wikipedia.org' << anchor['href'] ## nil href attributes are often self refs (but possibly not always). Ignore them.
+      end
+
+      uris.compact
+    end
     
     def self.is_valid_wiki_article?(uri:)
       ## Is this URI a wikipedia article?
       uri =~ /.*wikipedia\.org\/wiki\/.+/ ? true : false
     end
     
-
   end
 end

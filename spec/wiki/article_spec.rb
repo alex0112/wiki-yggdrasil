@@ -70,5 +70,17 @@ describe Wiki::Yggdrasil::Article do
     end
   end
 
+  describe '.format_links' do
+    let(:nil_hrefs) { @article.scrape_all_summary_links.each_with_index {|link, i| link['href'] = nil unless i % 2 == 0 } } ## Set every other href as nil
+
+    it 'takes an href of the form "/wiki/Article_Name and creates a valid wikipedia URI from it' do
+      expect(@article.format_links.all? {|link| Wiki::Yggdrasil::Article.is_valid_wiki_article?(uri: link) } ).to be true
+    end
+
+    it 'ignores nil href values' do
+      expect(@article.format_links(anchors: nil_hrefs).any?(&:nil?)).to be false
+    end
+  end
+
 end
 
