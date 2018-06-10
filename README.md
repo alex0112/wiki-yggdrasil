@@ -1,10 +1,26 @@
 # Wiki::Yggdrasil
 ![Travis CI Build](https://travis-ci.org/alex0112/wiki-yggdrasil.svg?branch=master)
 
+You.  You're up late at night again reading up on some obscure mathematical topic. (Nerd) You find yourself with *so many* open tabs on Wikipedia.  Wouldn't it be nice if you could just pick an article, and then view a tree of the articles it references? 
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/wiki/yggdrasil`. To experiment with that code, run `bin/console` for an interactive prompt.
+Introducing Wiki::Yggdrasil.  Named after the tree in Norse mythology that drinks from the well of all wisdom, Wiki::Yggdrasil is here to help you drink just as deeply from the well of wisdom that is Wikipedia.
 
-TODO: Delete this and the text above, and describe your gem
+## Usage
+```ruby
+require 'wiki/yggdrasil'
+
+@tree               = Wiki::Yggdrasil::Yggdrasil.new(uri: 'http://en.wikipedia.org/wiki/Yggdrasil')
+referenced_articles = @tree.children(depth: 3) ## A hash of of articles linked in the summary section of the parent article
+```
+
+## FAQ
+
+### This is taking a long time.  Is that normal?
+Yes.  This is normal. Any Yggdrasil object created with a depth of three or higher will likely take a few minutes to scrape the necessary information.
+
+### Why didn't you just use Wikipedia's API?
+Wikipedia's API doesn't have an endpoint that allows you to programatically view the summary section of each article and its children.  If it did that would obviously be the ideal choice.
+
 
 ## Installation
 
@@ -22,9 +38,6 @@ Or install it yourself as:
 
     $ gem install wiki-yggdrasil
 
-## Usage
-
-TODO: Write usage instructions here
 
 ## Development
 
@@ -34,7 +47,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/wiki-yggdrasil.
+Bug reports and pull requests are welcome on GitHub at https://github.com/alex0112/wiki-yggdrasil.
 
 ## License
 
