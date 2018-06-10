@@ -12,18 +12,23 @@ module Wiki::Yggdrasil
       @child_links = nil
     end
 
-    def self.is_valid_wiki_article?(uri:)
-      ## Is this URI a wikipedia article?
-      uri =~ /.*wikipedia\.org\/wiki\/.+/ ? true : false
-    end
-
     def summary
       @summary ||= Nokogiri::HTML(Nokogiri::HTML(open(self.uri)).to_s.split('<div id="toc" class="toc">')[0]).css('p') ## TODO: Cleanup
     end
 
     def child_links
-      summary        = self.summary
-      @child_links ||= summary.css('p a').map {|anchor| 'https://en.wikipedia.org' << anchor['href'] }.select {|uri| Wiki::Yggdrasil::Article.is_valid_wiki_article?(uri: uri) }
+      summary         = self.summary
+      all_links       = summary.css('p a')
+      formatted_links = all_links.map { |anchor| 'https://en.wikipedia.org' << anchor['href'] }
+      validated_links =  formatted_links.select { |uri| Wiki::Yggdrasil::Article.is_valid_wiki_article?(uri: uri) }
+      @child_links  ||= validated_links
     end
+    
+    def self.is_valid_wiki_article?(uri:)
+      ## Is this URI a wikipedia article?
+      uri =~ /.*wikipedia\.org\/wiki\/.+/ ? true : false
+    end
+    
+
   end
 end
