@@ -17,11 +17,14 @@ module Wiki::Yggdrasil
     end
 
     def child_links
-      summary         = self.summary
-      all_links       = summary.css('p a')
+      all_links       = scrape_all_summary_links
       formatted_links = all_links.map { |anchor| 'https://en.wikipedia.org' << anchor['href'] }
       validated_links =  formatted_links.select { |uri| Wiki::Yggdrasil::Article.is_valid_wiki_article?(uri: uri) }
       @child_links  ||= validated_links
+    end
+
+    def scrape_all_summary_links
+      self.summary.css('p a')
     end
     
     def self.is_valid_wiki_article?(uri:)
