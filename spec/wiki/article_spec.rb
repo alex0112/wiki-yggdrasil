@@ -70,6 +70,12 @@ describe Wiki::Yggdrasil::Article do
     end
   end
 
+  describe '.name' do
+    it 'correctly scrapes the name "Yggdrasil" from the Yggdrasil article' do
+      expect(@article.name).to eq 'Yggdrasil'
+    end
+  end
+  
   describe '.format_links' do
     let(:nil_hrefs) { @article.scrape_all_summary_links.each_with_index {|link, i| link['href'] = nil unless i % 2 == 0 } } ## Set every other href as nil
 

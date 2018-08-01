@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
+
 module Wiki::Yggdrasil
   
   class Article
@@ -10,8 +11,9 @@ module Wiki::Yggdrasil
       @uri         = uri
       @summary     = nil
       @child_links = nil
+      @name        = nil
     end
-
+    
     def summary
       @summary ||= Nokogiri::HTML(Nokogiri::HTML(open(self.uri)).to_s.split('<div id="toc" class="toc">')[0]).css('p') ## TODO: Cleanup
     end
@@ -26,6 +28,11 @@ module Wiki::Yggdrasil
       self.summary.css('p a')
     end
 
+    def name
+      @name ||= Nokogiri::HTML(open(self.uri)).css('#firstHeading').inner_html
+      ## TODO: Cleanup
+    end
+    
     def format_links(anchors: self.scrape_all_summary_links)
       uris = anchors.map do |anchor|
         anchor.nil? || anchor['href'].nil? ? next : 'https://en.wikipedia.org' << anchor['href'] ## nil href attributes are often self refs (but possibly not always). Ignore them.
@@ -33,11 +40,16 @@ module Wiki::Yggdrasil
 
       uris.compact
     end
-    
+
     def self.is_valid_wiki_article?(uri:)
       ## Is this URI a wikipedia article?
       uri =~ /.*wikipedia\.org\/wiki\/.+/ ? true : false
     end
     
   end
+
+
 end
+
+puts Wiki::Yggdrasil::Article.new(uri: 'https://en.wikipedia.org/wiki/Yggdrasil').name
+
