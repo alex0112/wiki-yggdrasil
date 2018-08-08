@@ -20,9 +20,6 @@ referenced_articles = @tree.children(depth: 3) ## A hash of of articles linked b
 ### This is taking a long time.  Is that normal?
 Yes.  This is normal. Any Yggdrasil object created with a depth of three or higher will likely take a few minutes to scrape the necessary information.
 
-### Why didn't you just use Wikipedia's API?
-Wikipedia's API doesn't have an endpoint that allows you to programatically view the summary section of each article and its children.  If it did that would obviously be the ideal choice.
-
 ## Installation
 
 Add this line to your application's Gemfile:
