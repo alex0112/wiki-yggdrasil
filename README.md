@@ -12,7 +12,30 @@ Wiki::Yggdrasil takes a Wikipedia URI as an argument, and proceeds to spider out
 require 'wiki/yggdrasil'
 
 @tree               = Wiki::Yggdrasil::Yggdrasil.new(uri: 'http://en.wikipedia.org/wiki/Yggdrasil')
-referenced_articles = @tree.children(depth: 3) ## A hash of of articles linked by the parent
+referenced_articles = @tree.children(depth: 1) ## A hash of of articles linked by the parent
+```
+The preceeding code produces a structure as follows:
+```ruby
+{:name=>"Help:IPA/English", :children=>[]}
+{:name=>"Help:IPA/English", :children=>[]}
+{:name=>"Old Norse", :children=>[]}
+{:name=>"Help:IPA", :children=>[]}
+{:name=>"Trees in mythology", :children=>[]}
+{:name=>"Norse cosmology", :children=>[]}
+{:name=>"<i>Poetic Edda</i>", :children=>[]}
+{:name=>"<i>Prose Edda</i>", :children=>[]}
+{:name=>"Snorri Sturluson", :children=>[]}
+{:name=>"<i>Fraxinus excelsior</i>", :children=>[]}
+{:name=>"Æsir", :children=>[]}
+{:name=>"Thing (assembly)", :children=>[]}
+{:name=>"Urðarbrunnr", :children=>[]}
+{:name=>"Hvergelmir", :children=>[]}
+{:name=>"Mímisbrunnr", :children=>[]}
+{:name=>"Níðhöggr", :children=>[]}
+{:name=>"Veðrfölnir and eagle", :children=>[]}
+{:name=>"Dáinn, Dvalinn, Duneyrr and Duraþrór", :children=>[]}
+{:name=>"Sacred trees and groves in Germanic paganism and mythology", :children=>[]}
+{:name=>"Ragnarök", :children=>[]}
 ```
 
 ## FAQ
