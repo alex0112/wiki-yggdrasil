@@ -30,7 +30,7 @@ module Wiki
           end
         end
         
-        @children ||= { name: self.root.name, children: get_children.call(depth, article_children) }
+        @children ||= [ name: self.root.name, children: get_children.call(depth, article_children) ]
       end
 
     end
