@@ -14,18 +14,23 @@ module Wiki
 
       def children(depth: 4, article_children: self.root.child_links)
         get_children = lambda do |depth, article_children|
-          article_children.each_with_object({}) do |uri, tree|
+          article_children.map do |uri|
+            article = Wiki::Yggdrasil::Article.new(uri: uri)
             if (depth == 1)
-              tree[uri] = nil
+              {
+                name: article.name,
+                children: [],
+              }
             else
-              article   = Wiki::Yggdrasil::Article.new(uri: uri)
-              @children = tree
-              tree[uri] = get_children.call(depth - 1, article.child_links)
+              {
+                name: article.name,
+                children: get_children.call(depth - 1, article.child_links),
+              }
             end
           end
         end
-
-        @children ||= get_children.call(depth, article_children)
+        
+        @children ||= { name: self.root.name, children: get_children.call(depth, article_children) }
       end
 
     end

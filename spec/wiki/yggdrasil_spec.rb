@@ -37,19 +37,66 @@ describe Wiki::Yggdrasil do
   end
 
   describe '.children' do  ## TODO:  Cleanup and implement mocking
-    it 'returns a hash for a tree with a depth of 1' do
-      children = @tree.children(depth: 1)
-      expect(children).to be_a Hash
+
+    it 'returns the proper structure for a tree with a depth of 1' do
+      children             = @tree.children(depth: 1)
+      first_level_name     = children[0][:name]
+      first_level_children = children[0][:children]
+      
+      expect(children).to be_an Array
+      expect(first_level_name).to be_a String
+      expect(first_level_children).to be_an Array
+      expect(first_level_children).to match_array []
     end
 
-    it 'returns a hash for a tree with a depth of 2' do
-      children_2 = @tree_2.children(depth: 2)
-      expect(children_2).to be_a Hash
-    end
+    it 'returns the proper structure for a tree with a depth of 2' do
+      children = @tree_2.children(depth: 2)
+      first_level_name      = children[0][:name]
+      first_level_children  = children[0][:children]
+      second_level_name     = children[0][:children][0][:name]
+      second_level_children = children[0][:children][0][:children]
 
-    it 'returns a hash for a tree with a depth of 3' do
-      children_3 = @tree_3.children(depth: 3)
-      expect(children_3).to be_a Hash
+      expected_first_level_object = { :name     => 'Yggdrasil',
+                                      :children => [ {:name=>"International Phonetic Alphabet", :children=>[]}, {:name=>"Template:IPAc-en", :children=>[]} ]
+                                    }
+      
+      expect(children).to be_an Array
+
+      ## Level 1
+      expect(first_level_name).to be_a String
+      expect(first_level_children).to be_an Array
+      expect(first_level_children).to match_array expected_first_level_object
+
+      ## Level 2
+      expect(second_level_name).to be_a String
+      expect(second_level_children).to be_an Array
+      expect(second_level_children).to match_array []
+
+    end 
+
+    it 'returns the proper structure for a tree with a depth of 3' do
+      children = @tree_3.children(depth: 3)
+      first_level_name      = children[0][:name]
+      first_level_children  = children[0][:children]
+      second_level_name     = children[0][:children][0][:name]
+      second_level_children = children[0][:children][0][:children]
+      third_level_name     = children[0][:children][0][:name][0][:name]
+      third_level_children = children[0][:children][0][:children][0][:children]
+
+      ## Level 1
+      expect(first_level_name).to be_a String
+      expect(first_level_children).to be_an Array
+      expect(first_level_children).to match_array [{:name=>"International Phonetic Alphabet", :children=>[]}, {:name=>"Template:IPAc-en", :children=>[]}]
+
+      ## Level 2
+      expect(second_level_name).to be_a String
+      expect(second_level_children).to be_an Array
+      #expect(second_level_children).to match_array []
+
+      ## Level 3
+      expect(third_level_name).to be_a String
+      expect(third_level_children).to be_an Array
+      expect(third_level_children).to match_array []
     end
   end
   
