@@ -50,6 +50,3 @@ module Wiki::Yggdrasil
 
 
 end
-
-puts Wiki::Yggdrasil::Article.new(uri: 'https://en.wikipedia.org/wiki/Yggdrasil').name
-
