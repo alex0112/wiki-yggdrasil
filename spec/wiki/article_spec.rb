@@ -52,6 +52,7 @@ describe Wiki::Yggdrasil::Article do
     it 'returns a list of valid wikipedia URIs' do
       expect(@article.child_links.all? { |link| Wiki::Yggdrasil::Article.is_valid_wiki_article?(uri: link) }).to be true
     end
+
     
     it 'returns an array' do
       expect(@article.child_links).to be_a Array
@@ -65,6 +66,9 @@ describe Wiki::Yggdrasil::Article do
       expect(summary_links).to be_a Nokogiri::XML::NodeSet
     end
 
+    xit 'returns the help articles when the help param is set to true' do
+    end
+    
     it 'is an array of valid anchor tags' do
       expect(summary_links.all? { |link| (link.to_s =~ /^<a.*<\/a>$/) }).to be true ## regex tests that all strings in the array have the form of '<a ... </a>'
     end

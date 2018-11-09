@@ -18,14 +18,15 @@ module Wiki::Yggdrasil
       @summary ||= Nokogiri::HTML(Nokogiri::HTML(open(self.uri)).to_s.split('<div id="toc" class="toc">')[0]).css('p') ## TODO: Cleanup
     end
 
-    def child_links
+    def child_links(help: false)
       formatted_links = format_links
-      validated_links =  formatted_links.select { |uri| Wiki::Yggdrasil::Article.is_valid_wiki_article?(uri: uri) }
+      validated_links = formatted_links.select { |uri| Wiki::Yggdrasil::Article.is_valid_wiki_article?(uri: uri) }
+      
       @child_links  ||= validated_links
     end
 
-    def scrape_all_summary_links
-      self.summary.css('p a')
+    def scrape_all_summary_links(help_links: false) ## TODO test help_links param in spec
+      help_links ? self.summary.css('p a') : self.summary.css('p a[href!="/wiki/Help:IPA/English"]')
     end
 
     def name
@@ -36,6 +37,7 @@ module Wiki::Yggdrasil
     def format_links(anchors: self.scrape_all_summary_links)
       uris = anchors.map do |anchor|
         anchor.nil? || anchor['href'].nil? ? next : 'https://en.wikipedia.org' << anchor['href'] ## nil href attributes are often self refs (but possibly not always). Ignore them.
+        ## TODO: take care of this in .scrape_all_summary_links with a css selector (like the Help:IPA links)
       end
 
       uris.compact
