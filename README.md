@@ -1,10 +1,6 @@
 # Wiki::Yggdrasil
 ![Travis CI Build](https://travis-ci.org/alex0112/wiki-yggdrasil.svg?branch=master)
 
-You.  You're up late at night again reading up on some obscure mathematical topic.  You find yourself with *so many* open tabs on Wikipedia.  Wouldn't it be nice if you could just pick an article, and then view a tree of the articles it references?
-
-Introducing Wiki::Yggdrasil.  Named after the tree in Norse mythology that drinks from the well of all wisdom, Wiki::Yggdrasil is here to help you drink just as deeply from the well of wisdom that is Wikipedia.
-
 Wiki::Yggdrasil takes a Wikipedia URI as an argument, and proceeds to spider out a dependency tree of referenced articles.
 
 ## Usage
@@ -38,10 +34,7 @@ The preceeding code produces a structure as follows:
 {:name=>"Ragnarök", :children=>[]}
 ```
 
-## FAQ
-
-### This is taking a long time.  Is that normal?
-Yes.  This is normal. Any Yggdrasil object created with a depth of three or higher will likely take a few minutes to scrape the necessary information.
+_Note: Any Yggdrasil object created with a depth of three or higher will likely take a few minutes to scrape the necessary information._
 
 ## Installation
 
