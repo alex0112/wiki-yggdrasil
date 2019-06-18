@@ -19,11 +19,13 @@ module Wiki
             if (depth == 1)
               {
                 name: article.name,
+                index: depth - 1,
                 children: [],
               }
             else
               {
                 name: article.name,
+                index: depth - 1,
                 children: get_children.call(depth - 1, article.child_links),
               }
             end

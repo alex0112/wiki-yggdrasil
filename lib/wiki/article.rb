@@ -25,7 +25,7 @@ module Wiki::Yggdrasil
       @child_links  ||= validated_links
     end
 
-    def scrape_all_summary_links(help_links: false) ## TODO test help_links param in spec
+    def scrape_links(help_links: false) ## TODO test help_links param in spec
       help_links ? self.summary.css('p a') : self.summary.css('p a[href!="/wiki/Help:IPA/English"]')
     end
 
@@ -34,17 +34,20 @@ module Wiki::Yggdrasil
       ## TODO: Cleanup
     end
     
-    def format_links(anchors: self.scrape_all_summary_links)
+    def format_links(anchors: self.scrape_links)
       uris = anchors.map do |anchor|
         anchor.nil? || anchor['href'].nil? ? next : 'https://en.wikipedia.org' << anchor['href'] ## nil href attributes are often self refs (but possibly not always). Ignore them.
-        ## TODO: take care of this in .scrape_all_summary_links with a css selector (like the Help:IPA links)
+        ## TODO: take care of this in .scrape_links with a css selector (like the Help:IPA links)
       end
 
       uris.compact
     end
 
+    def self.remove_italic_tags(uri_list)
+      
+    end
+    
     def self.is_valid_wiki_article?(uri:)
-      ## Is this URI a wikipedia article?
       uri =~ /.*wikipedia\.org\/wiki\/.+/ ? true : false
     end
     
