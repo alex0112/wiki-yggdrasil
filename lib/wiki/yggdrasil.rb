@@ -13,28 +13,31 @@ module Wiki
       end
 
       def children(depth: 4, article_children: self.root.child_links)
-        get_children = lambda do |depth, article_children|
-          article_children.map do |uri|
-            article = Wiki::Yggdrasil::Article.new(uri: uri)
-            if (depth == 1)
-              {
-                name: article.name,
-                index: depth - 1,
-                children: [],
-              }
-            else
-              {
-                name: article.name,
-                index: depth - 1,
-                children: get_children.call(depth - 1, article.child_links),
-              }
-            end
-          end
-        end
-        
-        @children ||= { name: self.root.name, children: get_children.call(depth, article_children) }
+        @children ||= { name: self.root.name, children: recursive_scrape(depth: depth), index: 0, depth: 0 }
       end
 
+      def recursive_scrape(depth: 1, children: @root.child_links)
+        children.each_with_index.map do |uri, index|
+          article = Wiki::Yggdrasil::Article.new(uri: uri)
+          if (depth == 1)
+            {
+              name: article.name,
+              index: index + 1,
+              level: depth,
+              children: [],
+            }
+          else
+            {
+              name: article.name,
+              index: index + 1,
+              level: depth,
+              children: recursive_scrape(depth - 1, article.child_links),
+            }
+          end
+        end
+      end
     end
+
   end
+
 end
