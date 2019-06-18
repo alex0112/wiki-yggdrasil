@@ -97,6 +97,13 @@ describe Wiki::Yggdrasil do
       expect(third_level_children).to be_an Array
       expect(third_level_children).to match_array []
     end
+
+    xit 'indexes each node properly' do
+    end
+
+    xit 'correctly adds the node level' do
+    end
+    
   end
   
 end
