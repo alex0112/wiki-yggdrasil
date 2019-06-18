@@ -36,6 +36,14 @@ describe Wiki::Yggdrasil::Article do
       end
     end
   end
+
+  describe '#remove_italic_tags' do
+    let(:uri_list) { [] }
+    it "removes italics from the uri string" do
+    end
+
+    
+  end
   
   describe '.summary' do
     it 'is a Nokogiri document' do
@@ -59,8 +67,8 @@ describe Wiki::Yggdrasil::Article do
     end
   end
 
-  describe '.scrape_all_summary_links' do
-    let(:summary_links) { @article.scrape_all_summary_links }
+  describe '.scrape_links' do
+    let(:summary_links) { @article.scrape_links }
 
     it 'returns a Nokogiri::XML::NodeSet' do
       expect(summary_links).to be_a Nokogiri::XML::NodeSet
@@ -81,7 +89,7 @@ describe Wiki::Yggdrasil::Article do
   end
   
   describe '.format_links' do
-    let(:nil_hrefs) { @article.scrape_all_summary_links.each_with_index {|link, i| link['href'] = nil unless i % 2 == 0 } } ## Set every other href as nil
+    let(:nil_hrefs) { @article.scrape_links.each_with_index {|link, i| link['href'] = nil unless i % 2 == 0 } } ## Set every other href as nil
 
     it 'takes an href of the form "/wiki/Article_Name and creates a valid wikipedia URI from it' do
       expect(@article.format_links.all? {|link| Wiki::Yggdrasil::Article.is_valid_wiki_article?(uri: link) } ).to be true
