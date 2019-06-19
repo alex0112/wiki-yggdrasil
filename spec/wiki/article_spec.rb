@@ -37,12 +37,10 @@ describe Wiki::Yggdrasil::Article do
     end
   end
 
-  describe '#remove_italic_tags' do
+  xdescribe '#remove_italic_tags' do
     let(:uri_list) { [] }
     it "removes italics from the uri string" do
     end
-
-    
   end
   
   describe '.summary' do
