@@ -53,6 +53,12 @@ describe Wiki::Yggdrasil::Article do
     end
   end
 
+  describe '.checksum' do
+    it 'returns an md5 sum of the summary' do
+      expect(@article.checksum).to eq Digest::MD5.hexdigest(@article.summary.to_s)
+    end
+  end
+
   
   describe '.child_links' do
     it 'returns a list of valid wikipedia URIs' do

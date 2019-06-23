@@ -1,5 +1,7 @@
 require "bundler/setup"
 require "wiki/yggdrasil"
+require 'digest'
+
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

@@ -12,10 +12,15 @@ module Wiki::Yggdrasil
       @summary     = nil
       @child_links = nil
       @name        = nil
+      @checksum    = nil
     end
     
     def summary
       @summary ||= Nokogiri::HTML(Nokogiri::HTML(open(self.uri)).to_s.split('<div id="toc" class="toc">')[0]).css('p') ## TODO: Cleanup
+    end
+
+    def checksum
+      Digest::MD5.hexdigest(@summary.to_s)
     end
 
     def child_links(help: false)
