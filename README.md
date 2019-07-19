@@ -12,26 +12,34 @@ referenced_articles = @tree.children(depth: 1) ## A hash of of articles linked b
 ```
 The preceeding code produces a structure as follows:
 ```ruby
-{:name=>"Help:IPA/English", :children=>[]}
-{:name=>"Help:IPA/English", :children=>[]}
-{:name=>"Old Norse", :children=>[]}
-{:name=>"Help:IPA", :children=>[]}
-{:name=>"Trees in mythology", :children=>[]}
-{:name=>"Norse cosmology", :children=>[]}
-{:name=>"<i>Poetic Edda</i>", :children=>[]}
-{:name=>"<i>Prose Edda</i>", :children=>[]}
-{:name=>"Snorri Sturluson", :children=>[]}
-{:name=>"<i>Fraxinus excelsior</i>", :children=>[]}
-{:name=>"Æsir", :children=>[]}
-{:name=>"Thing (assembly)", :children=>[]}
-{:name=>"Urðarbrunnr", :children=>[]}
-{:name=>"Hvergelmir", :children=>[]}
-{:name=>"Mímisbrunnr", :children=>[]}
-{:name=>"Níðhöggr", :children=>[]}
-{:name=>"Veðrfölnir and eagle", :children=>[]}
-{:name=>"Dáinn, Dvalinn, Duneyrr and Duraþrór", :children=>[]}
-{:name=>"Sacred trees and groves in Germanic paganism and mythology", :children=>[]}
-{:name=>"Ragnarök", :children=>[]}
+{:name=>"Yggdrasil",
+ :children=>
+  [{:name=>"Old Norse", :index=>1, :level=>1, :children=>[]},
+   {:name=>"Trees in mythology", :index=>2, :level=>1, :children=>[]},
+   {:name=>"Norse cosmology", :index=>3, :level=>1, :children=>[]},
+   {:name=>"Norse cosmology", :index=>4, :level=>1, :children=>[]},
+   {:name=>"<i>Poetic Edda</i>", :index=>5, :level=>1, :children=>[]},
+   {:name=>"<i>Prose Edda</i>", :index=>6, :level=>1, :children=>[]},
+   {:name=>"Snorri Sturluson", :index=>7, :level=>1, :children=>[]},
+   {:name=>"<i>Fraxinus excelsior</i>", :index=>8, :level=>1, :children=>[]},
+   {:name=>"Æsir", :index=>9, :level=>1, :children=>[]},
+   {:name=>"Thing (assembly)", :index=>10, :level=>1, :children=>[]},
+   {:name=>"Urðarbrunnr", :index=>11, :level=>1, :children=>[]},
+   {:name=>"Hvergelmir", :index=>12, :level=>1, :children=>[]},
+   {:name=>"Mímisbrunnr", :index=>13, :level=>1, :children=>[]},
+   {:name=>"Níðhöggr", :index=>14, :level=>1, :children=>[]},
+   {:name=>"Veðrfölnir and eagle", :index=>15, :level=>1, :children=>[]},
+   {:name=>"Dáinn, Dvalinn, Duneyrr and Duraþrór",
+    :index=>16,
+    :level=>1,
+    :children=>[]},
+   {:name=>"Sacred trees and groves in Germanic paganism and mythology",
+    :index=>17,
+    :level=>1,
+    :children=>[]},
+   {:name=>"Ragnarök", :index=>18, :level=>1, :children=>[]}],
+ :index=>0,
+ :depth=>0}
 ```
 
 _Note: Any Yggdrasil object created with a depth of three or higher will likely take a few minutes to scrape the necessary information._
