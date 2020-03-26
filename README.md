@@ -42,7 +42,7 @@ The preceeding code produces a structure as follows:
  :depth=>0}
 ```
 
-_Note: Any Yggdrasil object created with a depth of three or higher will likely take a few minutes to scrape the necessary information._
+_Note: Any Yggdrasil object created with a depth of three or higher will likely take a few minutes to scrape the necessary information.  If you'd like to contribute to making this process faster, check out [this issue](https://github.com/alex0112/wiki-yggdrasil/issues/8)._
 
 ## Installation
 
